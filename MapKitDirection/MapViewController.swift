@@ -157,6 +157,79 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    @IBAction func showNearBy(sender: UIButton) {
+        let searchRequest = MKLocalSearchRequest()
+        searchRequest.naturalLanguageQuery = restaurant.type
+        searchRequest.region = mapView.region
+        
+        let localSearch = MKLocalSearch(request: searchRequest)
+        localSearch.start { (response, error) -> Void in
+            guard let response = response else {
+                if let error = error {
+                    print(error)
+                }
+                
+                return
+            }
+            
+            let mapItems = response.mapItems
+            var nearbyAnnotations: [MKAnnotation] = []
+            if mapItems.count > 0 {
+                for item in mapItems {
+                    // Add annotation
+                    let annotation = MKPointAnnotation()
+                    annotation.title = item.name
+                    annotation.subtitle = item.phoneNumber
+                    if let location = item.placemark.location {
+                        annotation.coordinate = location.coordinate
+                    }
+                    nearbyAnnotations.append(annotation)
+                }
+            }
+            
+            self.mapView.showAnnotations(nearbyAnnotations, animated: true)
+        }
+    }
+    
+    func mapView(_mapView: MKMapView, viewFor annotaion: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "MyPin"
+        
+        if annotaion.isKind(of: MKUserLocation.self) {
+            return nil
+        }
+        
+        //Reuse the annotation if possible
+        var annotationView:MKPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotaion, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+        }
+        
+        //Pin color cutomization based on the type of annotation
+        if let currentPlacemarkCoordinate = currentPlacemark?.location?.coordinate {
+            if currentPlacemarkCoordinate.latitude == annotaion.coordinate.latitude && currentPlacemarkCoordinate.longitude == annotaion.coordinate.longitude {
+                let leftIconView = UIImageView(frame: CGRect(x: 0, y: 0, width: 53, height: 53))
+                leftIconView.image = UIImage(named: restaurant.image)
+                annotationView?.leftCalloutAccessoryView = leftIconView
+                
+                //Pin color customization
+                if #available(iOS 9.0, *) {
+                    annotationView?.pinTintColor = .orange
+                }
+            } else {
+                //Pin color customization
+                if #available(iOS 9.0, *) {
+                    annotationView?.pinTintColor = .red
+                }
+            }
+            
+        }
+        annotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure)
+        
+        return annotationView
+    }
+    
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = (currentTransportType == .automobile) ? UIColor.blue : UIColor.orange

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LcO-dw-SNA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LcO-dw-SNA">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,10 +20,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="Lk1-R9-Es4">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lk1-R9-Es4" id="VIf-kC-02h">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -51,8 +54,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-IX-lkO"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-IX-lkO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
                             <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tpj-yl-bg6">
+                                <rect key="frame" x="324" y="20" width="35" height="35"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.1215686275" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="UsS-UX-QVh"/>
@@ -72,6 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEj-5k-AC1">
+                                <rect key="frame" x="325" y="63" width="34" height="34"/>
                                 <color key="backgroundColor" red="0.1137254902" green="0.1215686275" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="VDS-Tw-0Hf"/>
@@ -89,11 +96,22 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JPn-ld-i6g">
+                                <rect key="frame" x="234" y="613" width="125" height="29"/>
                                 <segments>
                                     <segment title="Car"/>
                                     <segment title="Walking"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKS-qT-fe8">
+                                <rect key="frame" x="311" y="105" width="50" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.3972870255" blue="0.124561676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Nearby">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showNearBySender:" destination="vIg-fp-xRT" eventType="touchUpInside" id="3wO-cn-rOm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -101,9 +119,11 @@
                             <constraint firstItem="Tpj-yl-bg6" firstAttribute="top" secondItem="Goi-EB-4Np" secondAttribute="bottom" id="7Jv-pw-zJL"/>
                             <constraint firstItem="8HF-jw-9YF" firstAttribute="top" secondItem="JPn-ld-i6g" secondAttribute="bottom" constant="26" id="K4V-03-SEG"/>
                             <constraint firstItem="jEj-5k-AC1" firstAttribute="trailing" secondItem="Ial-l8-Ek4" secondAttribute="trailingMargin" id="Qzf-FC-f5I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GKS-qT-fe8" secondAttribute="trailing" constant="-2" id="ZGM-bv-y1l"/>
                             <constraint firstItem="Ghd-IX-lkO" firstAttribute="leading" secondItem="Ial-l8-Ek4" secondAttribute="leading" id="cvS-nV-Rnw"/>
                             <constraint firstItem="8HF-jw-9YF" firstAttribute="top" secondItem="Ghd-IX-lkO" secondAttribute="bottom" id="ghl-Lq-MjE"/>
                             <constraint firstItem="Ghd-IX-lkO" firstAttribute="top" secondItem="Ial-l8-Ek4" secondAttribute="top" id="nLY-ll-zkG"/>
+                            <constraint firstItem="GKS-qT-fe8" firstAttribute="top" secondItem="jEj-5k-AC1" secondAttribute="bottom" constant="8" symbolic="YES" id="opg-Jx-rCh"/>
                             <constraint firstAttribute="trailing" secondItem="Ghd-IX-lkO" secondAttribute="trailing" id="vbH-Dk-3az"/>
                             <constraint firstItem="Tpj-yl-bg6" firstAttribute="trailing" secondItem="Ial-l8-Ek4" secondAttribute="trailingMargin" id="vhr-7S-beu"/>
                             <constraint firstItem="jEj-5k-AC1" firstAttribute="top" secondItem="Tpj-yl-bg6" secondAttribute="bottom" constant="8" id="xwJ-x3-wqG"/>
@@ -130,10 +150,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Mh3-dD-f8v">
-                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mh3-dD-f8v" id="jCx-Iv-ImJ">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
